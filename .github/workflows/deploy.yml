@@ -25,10 +25,10 @@ jobs:
             yarn
 
             # Create the namespace if it doesn't exist
-            wrangler2 kv:namespace list | grep -q GmodExpress || wrangler2 kv:namespace create GmodExpress
+            wrangler kv:namespace list | grep -q GmodExpress || wrangler kv:namespace create GmodExpress
 
             # Get the namespace ID
-            namespaceid=$(wrangler2 kv:namespace list | jq '.[] | select(.title=="gmod-express-GmodExpress") | .id')
+            namespaceid=$(wrangler kv:namespace list | jq '.[] | select(.title=="gmod-express-GmodExpress") | .id')
 
             # Add the binding to the wrangler.toml
             echo "kv_namespaces = [ { binding = 'GmodExpress', id = $namespaceid } ]" >> wrangler.toml
