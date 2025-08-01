@@ -22,7 +22,8 @@ jobs:
             sudo apt-get update -y && sudo apt-get install -y jq
 
             # Install packages
-            yarn
+            npm install
+            npm install --save-dev wrangler@4
 
             # Create the namespace if it doesn't exist
             npx wrangler kv:namespace list | grep -q GmodExpress || npx wrangler kv:namespace create GmodExpress
