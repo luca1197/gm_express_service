@@ -13,7 +13,7 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Publish
-        uses: cloudflare/wrangler-action@v3
+        uses: cloudflare/wrangler-action@v3.14.1
         with:
           accountId: ${{ secrets.CF_ACCOUNT_ID }}
           apiToken: ${{ secrets.CF_API_TOKEN }}
@@ -25,10 +25,10 @@ jobs:
             yarn
 
             # Create the namespace if it doesn't exist
-            wrangler kv:namespace list | grep -q GmodExpress || wrangler kv:namespace create GmodExpress
+            npx wrangler kv:namespace list | grep -q GmodExpress || npx wrangler kv:namespace create GmodExpress
 
             # Get the namespace ID
-            namespaceid=$(wrangler kv:namespace list | jq '.[] | select(.title=="gmod-express-GmodExpress") | .id')
+            namespaceid=$(npx wrangler kv:namespace list | jq '.[] | select(.title=="gmod-express-GmodExpress") | .id')
 
             # Add the binding to the wrangler.toml
             echo "kv_namespaces = [ { binding = 'GmodExpress', id = $namespaceid } ]" >> wrangler.toml
